@@ -3,6 +3,7 @@ import argparse
 import networks.D2E as net
 import torchvision
 import tensorboardX
+import os
 
 use_gpu = False
 device = torch.device("cuda" if use_gpu else "cpu")

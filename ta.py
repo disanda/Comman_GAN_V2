@@ -14,7 +14,7 @@ G.load_state_dict(torch.load('./preTrained_model/Img128_Gs16_Ds1_Zdim128.pth',ma
 E = net.Discriminator_SpectrualNorm(input_dim=128, input_channels = 3, image_size=128, Gscale=16, Dscale=1, another_times=0)
 print(E)
 
-E_optimizer = LREQAdam([{'params': E.parameters()},], lr=0.0015, betas=(0.0, 0.99), weight_decay=0)
+E_optimizer = torch.optim.Adam(E.parameters(), lr=0.0002, betas=(0.0, 0.999).eps=1e-8)
 loss_mse = torch.nn.MSELoss()
 
 def set_seed(seed): #随机数设置

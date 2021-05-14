@@ -9,7 +9,7 @@ device = torch.device("cuda" if use_gpu else "cpu")
 #G = net.Generator(input_dim=256, output_channels = 3, image_size=256, Gscale=8, another_times=0).to(device)
 #G.load_state_dict(torch.load('./preTrained_model/Epoch_G_99.pth',map_location=device)) #shadow的效果要好一些 
 G = net.Generator(input_dim=128, output_channels = 3, image_size=128, Gscale=16, another_times=0).to(device)
-G.load_state_dict(torch.load('./preTrained_model/Img128_Gs16_Ds1_Zdim128.pth',map_location=device)) #shadow的效果要好一些 
+G.load_state_dict(torch.load('../preTrained_model/Img128_Gs16_Ds1_Zdim128.pth',map_location=device)) #shadow的效果要好一些 
 
 E = net.Discriminator_SpectrualNorm(input_dim=128, input_channels = 3, image_size=128, Gscale=16, Dscale=1, another_times=0)
 print(E)

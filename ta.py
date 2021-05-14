@@ -13,7 +13,7 @@ device = torch.device("cuda" if use_gpu else "cpu")
 G = net.Generator(input_dim=128, output_channels = 3, image_size=128, Gscale=16, another_times=0).to(device)
 G.load_state_dict(torch.load('../preTrained_model/Img128_Gs16_Ds1_Zdim128.pth',map_location=device)) #shadow的效果要好一些 
 
-E = net.Discriminator_SpectrualNorm(input_dim=128, input_channels = 3, image_size=128, Gscale=16, Dscale=1, another_times=0)
+E = net.Discriminator_SpectrualNorm(input_dim=128, input_channels = 3, image_size=128, Gscale=16, Dscale=1, another_times=0).to(device)
 print(E)
 
 E_optimizer = torch.optim.Adam(E.parameters(), lr=0.0002, betas=(0.0, 0.999), eps=1e-8)

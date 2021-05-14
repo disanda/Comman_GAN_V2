@@ -28,15 +28,15 @@ def set_seed(seed): #随机数设置
 
 output_dir = os.path.join('./output/', 'EAE_128')
 
-ckpt_dir = os.path.join(output_dir, 'checkpoints')
+ckpt_dir = os.path.join(output_dir, '/checkpoints')
 if not os.path.exists(ckpt_dir):
     os.mkdir(ckpt_dir)
 
-sample_dir = os.path.join(output_dir, 'samples_training')
+sample_dir = os.path.join(output_dir, '/samples_training')
 if not os.path.exists(sample_dir):
     os.mkdir(sample_dir)
 
-writer = tensorboardX.SummaryWriter(os.path.join(output_dir, 'summaries'))
+writer = tensorboardX.SummaryWriter(os.path.join(output_dir, '/summaries'))
 
 it_d=0
 batch_size = 100

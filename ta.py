@@ -80,9 +80,9 @@ for epoch in range(0,250001):
             with open(output_dir+'/Loss.txt', 'a+') as f:
                         print('i_'+str(epoch),f)
                         print('---------ImageSpace--------',f)
-                        print('loss_mse_img:'+str(loss_mse_img.item()),f)
+                        print('loss_mse_img:'+str(loss_img.item()),f)
                         print('---------LatentSpace--------',f)
-                        print('loss_w:'+str(loss_mse_z.item()),f)
+                        print('loss_w:'+str(loss_w.item()),f)
             if epoch % 5000 == 0:
                 torch.save(E.state_dict(), ckpt_dir+'/E_model_ep%d.pth'%epoch)
                 #torch.save(Gm.buffer1,resultPath1_2+'/center_tensor_ep%d.pt'%epoch)

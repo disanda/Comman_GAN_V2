@@ -30,7 +30,7 @@ def set_seed(seed): #随机数设置
     torch.backends.cudnn.deterministic = True
 
 
-output_dir = os.path.join('./output/', 'EAE_128_img-MSE+ssim_w-mse')
+output_dir = os.path.join('./output/', 'EAE_128_img-ssim+mse_w-ssim+mse_v2')
 if not os.path.exists(output_dir):
     os.mkdir(output_dir)
 
@@ -54,8 +54,9 @@ for epoch in range(0,250001):
         z2 = E(imgs1)
         imgs2=G(z2)
 
-        loss_img = ssim_loss(imgs1,imgs2) + mse_loss(img1,img2)
-        loss_w = mse_loss(img1,img2)
+        loss_img = 1-ssim_loss(imgs1,imgs2) + mse_loss(imgs1,imgs2)
+
+        loss_w = 1-ssim_loss(z1,z2) + mse_loss(z1,z2)
 
         loss = loss_img+loss_w
         E_optimizer.zero_grad()
@@ -79,10 +80,10 @@ for epoch in range(0,250001):
             torchvision.utils.save_image(test_img, sample_dir+'/ep%d.jpg'%(epoch),nrow=n_row//2) # nrow=3
             with open(output_dir+'/Loss.txt', 'a+') as f:
                         print('i_'+str(epoch),f)
-                        print('---------ImageSpace--------',f)
-                        print('loss_mse_img:'+str(loss_img.item()),f)
-                        print('---------LatentSpace--------',f)
-                        print('loss_w:'+str(loss_w.item()),f)
+                        print('---------ImageSpace--------',file = f)
+                        print('loss_mse_img:'+str(loss_img.item()),file = f)
+                        print('---------LatentSpace--------',file = f)
+                        print('loss_w:'+str(loss_w.item()),file = f)
             if epoch % 5000 == 0:
                 torch.save(E.state_dict(), ckpt_dir+'/E_model_ep%d.pth'%epoch)
                 #torch.save(Gm.buffer1,resultPath1_2+'/center_tensor_ep%d.pt'%epoch)

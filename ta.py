@@ -30,7 +30,7 @@ def set_seed(seed): #随机数设置
     torch.backends.cudnn.deterministic = True
 
 
-output_dir = os.path.join('./output/', 'EAE_128_ssim')
+output_dir = os.path.join('./output/', 'EAE_128_img-MSE+ssim_w-mse')
 if not os.path.exists(output_dir):
     os.mkdir(output_dir)
 
@@ -54,8 +54,8 @@ for epoch in range(0,250001):
         z2 = E(imgs1)
         imgs2=G(z2)
 
-        loss_img = ssim_loss(imgs1,imgs2)
-        loss_w = ssim_loss(z1,z2)
+        loss_img = ssim_loss(imgs1,imgs2) + mse_loss(img1,img2)
+        loss_w = mse_loss(img1,img2)
 
         loss = loss_img+loss_w
         E_optimizer.zero_grad()

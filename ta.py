@@ -57,7 +57,7 @@ for epoch in range(0,250001):
         loss_img = ssim_loss(imgs1,imgs2)
         loss_w = ssim_loss(z1,z2)
 
-        loss = loss_mse_img+loss_mse_z
+        loss = loss_img+loss_w
         E_optimizer.zero_grad()
         loss.backward(retain_graph=True)
         E_optimizer.step()
